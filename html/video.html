@@ -1,0 +1,138 @@
+<html>
+<head>
+<script src="http://www.youtube.com/player_api"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body style = "text-align: center">
+        <input type= text id="namehere" onchange="displayname()"><br>
+    <h2 style = "align-items: center">Watch the video till the end</h2>
+<div id="youtubevideo" mx:auto style=""></div>
+<script>
+
+var yid = ["A_Ht6y0XA4c", "wBQ8SnKDnL0", "OQ5jsbhAv_M"];         //youtube video id
+var maximum = yid.length;
+var minimum = 0;
+var randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum; 
+// create player
+var youtubevideo;
+
+function onYouTubePlayerAPIReady() {
+    youtubevideo = new YT.Player('youtubevideo', {
+      height: '390',
+      width: '640',
+      videoId: yid[randomnumber],
+    
+      
+
+
+//Here the video autoplays, the player hide controls and disable keyboard to prevent users from running past the video. NB: Autoplay only works on PCs. iOS 8 also forces Native controls.
+
+      playerVars:{'rel':0,'showinfo':0,'autoplay':1,'controls':1,'disablekb':1,'modestbranding':1},
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+        
+      }
+    });
+}
+
+
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+var database = firebase.database();
+//This tells the youtube player to trigger the hello() function when done
+function onPlayerStateChange(event) {        
+    if(event.data === 0) {
+        var points = 0;
+        var inc = 30;           
+        alert("You have gained 30 pts by watching this video");
+        points = points+inc;
+        alert(points);
+        var firebaseref = firebase.database().ref();
+        firebaseref.child("score").set(20);
+        return points;  
+
+    }
+}
+function hello(){var i='HTML GOES HERE';$("body").html(i)}
+</script>
+
+<!--<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "",
+    authDomain: "internapp-55c09.firebaseapp.com",
+    databaseURL: "https://internapp-55c09.firebaseio.com",
+    projectId: "internapp-55c09",
+    storageBucket: "internapp-55c09.appspot.com",
+    messagingSenderId: "339543640417"
+  };
+  firebase.initializeApp(config);
+
+  
+  firebase.initializeApp(config);
+  function login()
+  {
+      function newLoginHappened(user)
+      {
+          if (user)
+          {
+              app(user);
+          }     
+          else{
+              var provider = new firebase.auth.GoogleAuthProvider();
+              firebase.auth().signInWithRedirect(provider);
+          }
+      }
+      firebase.auth().OnAuthStateChanged(newLoginHappened);
+  }
+  function app(user)
+  {
+      function updateMyStatus(e)
+      {
+          var myUpdate = {};
+          myUpdate.email = user.email;
+          myUpdate.displayName = user.displayName;
+          myUpdate.status = document.getElementById("clientStatus").value;
+          fb.child(user.uid).set(myUpdate);
+      }
+      document.getElementById("clientname").innerHTML = user.displayName;
+      var fb = firebase.database().ref("whatismystatus");
+      document.getElementById("clientStatus").addEventListener("input",updateMyStatus);
+
+  }
+  window.onload=login;
+    var fb = firebase.database().ref()
+</script>
+</body>
+</html>
+-->
+
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "",
+    authDomain: "internapp-55c09.firebaseapp.com",
+    databaseURL: "https://internapp-55c09.firebaseio.com",
+    projectId: "internapp-55c09",
+    storageBucket: "internapp-55c09.appspot.com",
+    messagingSenderId: "339543640417"
+  };
+  firebase.initializeApp(config);
+
+  </script>
+  <script>
+
+    function displayname() {
+    var sav =  document.getElementById("namehere").value;
+    var firebaseref = firebase.database().ref();
+    var messagetext = namehere.value;
+    firebaseref.child("score").set(points);
+    }
+    
+</script>
+</body>
+</html>
